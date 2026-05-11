@@ -25,9 +25,7 @@ void help() {
     printf("Commands : help, hack, exit\n");
 }
 
-void execute_command(char *input){
-    
-}
+
 
 
 
@@ -45,6 +43,23 @@ command commands[] = {
     {"hack",hack_nasa}
 };
 
+void execute_command(char *input){
+    int size = sizeof(commands)/sizeof(commands[0]);
+    for (int i = 0; i < size; i++){
+        if (strcmp(input,commands[i].name) == 0){
+            commands[i].func();
+            return;
+        }
+        
+    }
+    printf("Unknown command: %s\n", input);
+}
+
+
+
+
+
+
 int main() {
     printf(">>>>>>>>>>   FakeCMD succesfully loaded. Run 'help' to see commands.\n");
     printf(">>>>>>>>>>   Original source @ https://github.com/j1mal/fake-cmd\n\n");
@@ -56,7 +71,7 @@ int main() {
         if (strcmp(input,"exit") == 0){
             break;
         }
-        
+        execute_command(input);
 
     }
 
